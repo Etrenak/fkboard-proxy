@@ -19,6 +19,8 @@ module.exports = class Binder {
 
         bind(this.fkboardSocket, this.pluginSocket, this);
         bind(this.pluginSocket, this.fkboardSocket, this);
+        this.fkboardSocket.send(JSON.stringify({"code": 951}))
+        this.pluginSocket.send(JSON.stringify({"code": 951}))
     }
 
     close(){
@@ -37,7 +39,7 @@ function bind(ws0, ws1, binder) {
         ws1.send(msg);
     })
     ws0.on("close", (code, reason) => {
-        if (!ws1.CLOSED) {
+        if (ws1.readyState != ws1.CLOSED) {
             ws1.close(code, reason);
             binder.close();
         }

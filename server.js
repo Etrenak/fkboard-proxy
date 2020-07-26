@@ -6,6 +6,7 @@ const wsMap = {}
 
 server.on('connection', webSocket => {
   webSocket.on('message', message => {
+    console.log("New msg : " + message);
     if(webSocket.firstMsg == false)
       return;
     webSocket.firstMsg = false;
@@ -17,7 +18,9 @@ server.on('connection', webSocket => {
         delete wsMap[id];
       }
     }
-    else
+    else {
       wsMap[id] = new Binder(id, webSocket);
+      webSocket.send(JSON.stringify({"code": 952}))
+    }
   })
 })
