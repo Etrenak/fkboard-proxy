@@ -14,13 +14,13 @@ server.on('connection', webSocket => {
     const id = json.id;
     if (id in wsMap) {
       wsMap[id].bindWith(webSocket)
-      wsMap[id].onClose = () => {
-        delete wsMap[id];
-      }
     }
     else {
       wsMap[id] = new Binder(id, webSocket);
       webSocket.send(JSON.stringify({"code": 952}))
+      wsMap[id].onClose = () => {
+        delete wsMap[id];
+      }
     }
   })
 })
