@@ -16,11 +16,13 @@ server.on('connection', webSocket => {
       wsMap[id].bindWith(webSocket)
     }
     else {
-      wsMap[id] = new Binder(id, webSocket);
-      webSocket.send(JSON.stringify({"code": 952}))
-      wsMap[id].onClose = () => {
-        delete wsMap[id];
+      if(json.senderType = "fkboard"){
+        wsMap[id] = new Binder(id, webSocket);
+        wsMap[id].onClose = () => {
+          delete wsMap[id];
+        }
       }
+      webSocket.send(JSON.stringify({"code": 952}))
     }
   })
 })
