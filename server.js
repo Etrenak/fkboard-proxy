@@ -16,7 +16,7 @@ server.on('connection', webSocket => {
       wsMap[id].bindWith(webSocket)
     }
     else {
-      if(json.senderType = "fkboard"){
+      if(json.senderType === "fkboard"){
         wsMap[id] = new Binder(id, webSocket);
         wsMap[id].onClose = () => {
           delete wsMap[id];
