@@ -39,7 +39,7 @@ function bind(ws0, ws1, binder) {
         ws1.send(msg);
     })
     ws0.on("close", (code, reason) => {
-        if (ws1.readyState != ws1.CLOSED) {
+        if (ws1.readyState === ws1.OPEN) {
             ws1.close(code, reason);
             binder.close();
         }
