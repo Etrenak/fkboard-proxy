@@ -40,7 +40,7 @@ function bind(ws0, ws1, binder) {
     })
     ws0.on("close", (code, reason) => {
         if (ws1.readyState === ws1.OPEN) {
-            ws1.close(code, reason);
+            ws1.close(1001, "FkBoard has gone away");
             binder.close();
         }
     });
